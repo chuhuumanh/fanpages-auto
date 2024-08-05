@@ -31,15 +31,38 @@ const infrastructureDatabaseModule = (databaseConfig() as DatabaseConfig)
     });
 // </database-block>
 
+import { UsersModule } from './users/users.module';
+
+import { RolesModule } from './roles/roles.module';
+
+import { FanpagesModule } from './fanpages/fanpages.module';
+
+import { PostsModule } from './posts/posts.module';
+
+import { CommentsModule } from './comments/comments.module';
+
+import { ScheduledTasksModule } from './scheduled-tasks/scheduled-tasks.module';
+
+import { MediaModule } from './media/media.module';
+
+import { PostMediaModule } from './post-media/post-media.module';
+
+import { LogsModule } from './logs/logs.module';
+
 @Module({
   imports: [
+    LogsModule,
+    PostMediaModule,
+    MediaModule,
+    ScheduledTasksModule,
+    CommentsModule,
+    PostsModule,
+    FanpagesModule,
+    RolesModule,
+    UsersModule,
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [
-        databaseConfig,
-        appConfig,
-        mailConfig,
-      ],
+      load: [databaseConfig, appConfig, mailConfig],
       envFilePath: ['.env'],
     }),
     infrastructureDatabaseModule,
